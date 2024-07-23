@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approved Users</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+   <style>
+        body {
+            color: #404E67;
+            background: #F5F7FA;
+            font-family: 'Open Sans', sans-serif;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .sidebar {
+            min-width: 200px;
+            max-width: 200px;
+            background-color: #2c3e50;
+            color: #fff;
+            height: 100%;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar .nav-link {
+            color: #fff;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: #1a252f;
+        }
+
+        .fastpay {
+            font-size: 1.5em;
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .table-wrapper {
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+            overflow-x: auto;
+        }
+
+        .table-title {
+            padding-bottom: 10px;
+            margin: 0 0 10px;
+        }
+
+        .table-title h2 {
+            margin: 6px 0 0;
+            font-size: 22px;
+        }
+
+        table.table {
+            table-layout: fixed;
+            width: 100%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+
+        table.table th, table.table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        table.table th {
+            background-color: #446bd0;
+            color: white;
+        }
+
+        .search-container {
+            float: right;
+            margin-top: 20px;
+        }
+
+        .search-container input[type=text] {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .search-container button {
+            float: right;
+            padding: 6px 10px;
+            margin-top: 8px;
+            margin-right: 16px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .search-container button:hover {
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="fastpay">FastPay</div>
+        <nav class="nav flex-column">
+            <a class="nav-link" th:href="@{/adminpage}">
+               <i class="fas fa-home"></i> Home
+            </a>
+            <a class="nav-link" th:href="@{/unapprovedUserPage}">
+                <i class="fa fa-user-times"></i> Unapproved Users
+            </a>
+            <a class="nav-link active" th:href="@{/approvedUserPage}">
+                 <i class="fas fa-user-check"></i> Approved Users
+            </a>
+            <a class="nav-link" th:href="@{/transactionHistory}">
+                <i class="fa fa-history"></i> Transaction History
+            </a>
+            <a class="nav-link" th:href="@{/logout1}">
+               <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="container">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2>Approved <b>Users</b></h2>
+                        </div>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 8%;">ID</th>
+                            <th style="width: 20%;">First Name</th>
+                            <th style="width: 20%;">Last Name</th>
+                            <th style="width: 30%;">Phone Number</th>
+                            <th style="width: 20%;">Date</th>
+                            <th style="width: 30%;">Aadhar Number</th>
+                            <th style="width: 30%;">IFSC Code</th>
+                            <th style="width: 40%;">Address</th>
+                            <th style="width: 30%;">Account ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="view : ${approveduserslist}">
+                            <td th:text="${view.userId}"></td>
+                            <td th:text="${view.firstName}"></td>
+                            <td th:text="${view.lastName}"></td>
+                            <td th:text="${view.phoneNumber}"></td>
+                            <td th:text="${view.date}"></td>
+                            <td th:text="${view.aadharNumber}"></td>
+                            <td th:text="${view.ifscCode}"></td>
+                            <td th:text="${view.address}"></td>
+                            <td th:text="${view.accountId}"></td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(approveduserslist)}">
+                            <td colspan="9"><p>No approved users found.</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

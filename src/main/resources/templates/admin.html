@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+        }
+
+        .sidebar {
+            min-width: 200px;
+            max-width: 200px;
+            background-color: #2c3e50;
+            color: #fff;
+            height: 100vh;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar .nav-link {
+            color: #fff;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #1a252f;
+        }
+
+        .sidebar .nav-link.active {
+            background-color: #1a252f;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .welcome-text {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: #446bd0;
+            color: #fff;
+        }
+
+        .card-body i {
+            margin-right: 10px;
+        }
+
+        .fastpay {
+            font-size: 1.5em;
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="fastpay">FastPay</div>
+        <nav class="nav flex-column">
+            <a class="nav-link active"  th:href="@{/}">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a class="nav-link"  th:href="@{/unapprovedUserPage}">
+                <i class="fas fa-user-times"></i> Unapproved Users
+            </a>
+            <a class="nav-link"  th:href="@{/approveduserpage}">
+                <i class="fas fa-user-check"></i> Approved Users
+            </a>
+            <a class="nav-link"  th:href="@{/transaction_history}">
+                <i class="fas fa-history"></i> Transaction History
+            </a>
+            <a class="nav-link"  th:href="@{/logout1}">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="welcome-text">Welcome Admin</div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Unapproved Users</div>
+                    <div class="card-body">
+                        <i class="fas fa-user-times"></i>
+                        <h5 class="card-title" th:text="${unapprovedUsersCount}">30</h5>
+                        <p class="card-text">Total number of unapproved users.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Approved Users</div>
+                    <div class="card-body">
+                        <i class="fas fa-user-check"></i>
+                        <h5 class="card-title" th:text="${approvedUsersCount}">120</h5>
+                        <p class="card-text">Total number of approved users.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Total Transactions</div>
+                    <div class="card-body">
+                        <i class="fas fa-history"></i>
+                        <h5 class="card-title" th:text="${totalTransactions}">150</h5>
+                        <p class="card-text">Total number of transactions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
